@@ -9,7 +9,7 @@ import sys
 import numpy as np
 n=100
 if len(sys.argv)>1:
-    n=int(sys.argv[0])
+    n=int(sys.argv[1])
 print n
 pos=np.random.randint(0,100,(n,2))
 p=np.random.uniform(0.15,0.25,n)

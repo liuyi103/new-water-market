@@ -21,16 +21,6 @@ sw=0
 q={}
 p={}
 th={}
-#for i in range(n):
-#    g.add_node(i)
-#    sell[i]=np.random.randint(0,2)
-#    pos[i]=np.random.rand(2)
-#    q[i]=np.random.rand(1)*5+1
-#    p[i]=np.random.rand(1)
-#for i in range(100):
-#    for j in range(100):
-#        if sell[i]==1 and sell[j]==0 and np.sum((pos[i]-pos[j])**2)<0.1 and p[i]<p[j]:
-#            g.add_edge(i,j)
 f=file('data.txt','r')
 for i in f:
     exec i
