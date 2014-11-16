@@ -42,7 +42,8 @@ prob.linear_constraints.add([[[f[j,i]for j in range(n) if g.has_edge(j,i)],[1.0 
 prob.linear_constraints.add([[[f[i[0],i[1]],x[i[0],i[1]]],[1,-th[i[0],i[1]]]]for i in edges],'G'*m,[0]*m)
 prob.linear_constraints.add([[[f[i[0],i[1]],x[i[0],i[1]]],[1,-min(q[i[0]],q[i[1]])]]for i in edges],'L'*m,[0]*m)
 prob.solve()
-print prob.solution.get_objective_value()
+file('res2.txt','w').write(str(prob.solution.get_objective_value()))
+
 ##prob=pp.LpProblem('lyc',pp.LpMaximize)
 ##xx=pp.LpVariable.dict('a',range(m),pp.LpBinary)
 ##ggg=pp.LpVariable.dict('b',range(m),0)

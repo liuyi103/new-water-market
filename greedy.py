@@ -44,7 +44,8 @@ for i in range(100):
                 continue
             q[i]-=tmp
             q[j]-=tmp
-            print tmp*abs(p[i]-p[j]) 
             sw+=tmp*abs(p[i]-p[j])
-print sw
+f=file('res1.txt','w')
+f.write(str(sw))
+f.close()
 
