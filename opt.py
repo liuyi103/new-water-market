@@ -1,7 +1,7 @@
-
 import pulp as pp
 import networkx as nx
 import cplex as cp
+import time
 n=100
 g=nx.DiGraph()
 pos={}
@@ -33,17 +33,39 @@ class trans:
             return 0
 x=trans(0)
 f=trans(1)
-prob=cp.Cplex()
-prob.variables.add([0]*m,types=[prob.variables.type.binary]*m)
-prob.variables.add([1 for i in range(m)],[0]*m,types=[prob.variables.type.continuous]*m)
-prob.objective.set_sense(prob.objective.sense.maximize)
-prob.linear_constraints.add([[[f[i,j]for j in range(n) if g.has_edge(i,j)],[1.0 for j in range(n) if g.has_edge(i,j)]]for i in range(n)],'L'*n,[q[i] for i in range(n)])
-prob.linear_constraints.add([[[f[j,i]for j in range(n) if g.has_edge(j,i)],[1.0 for j in range(n) if g.has_edge(j,i)]]for i in range(n)],'L'*n,[q[i] for i in range(n)])
-prob.linear_constraints.add([[[f[i[0],i[1]],x[i[0],i[1]]],[1,-th[i[0],i[1]]]]for i in edges],'G'*m,[0]*m)
-prob.linear_constraints.add([[[f[i[0],i[1]],x[i[0],i[1]]],[1,-min(q[i[0]],q[i[1]])]]for i in edges],'L'*m,[0]*m)
-prob.solve()
-file('vol2.txt','a').write(str(prob.solution.get_objective_value())+'\n')
-
+t1,t2,t3,t4=0,0,0,0
+try:
+    t1=time.time()
+    prob=cp.Cplex()
+    prob.variables.add([0]*m,types=[prob.variables.type.binary]*m)
+    prob.variables.add([1 for i in range(m)],[0]*m,types=[prob.variables.type.continuous]*m)
+    prob.objective.set_sense(prob.objective.sense.maximize)
+    prob.linear_constraints.add([[[f[i,j]for j in range(n) if g.has_edge(i,j)],[1.0 for j in range(n) if g.has_edge(i,j)]]for i in range(n)],'L'*n,[q[i] for i in range(n)])
+    prob.linear_constraints.add([[[f[j,i]for j in range(n) if g.has_edge(j,i)],[1.0 for j in range(n) if g.has_edge(j,i)]]for i in range(n)],'L'*n,[q[i] for i in range(n)])
+    prob.linear_constraints.add([[[f[i[0],i[1]],x[i[0],i[1]]],[1,-th[i[0],i[1]]]]for i in edges],'G'*m,[0]*m)
+    prob.linear_constraints.add([[[f[i[0],i[1]],x[i[0],i[1]]],[1,-min(q[i[0]],q[i[1]])]]for i in edges],'L'*m,[0]*m)
+    prob.solve()
+    t2=time.time()
+except:
+    t1,t2=0,10000
+#file('vol2.txt','a').write(str(prob.solution.get_objective_value())+'\n')
+file('time1.txt','a').write('%lf\n'%(t2-t1))
+try:
+    t3=time.time()
+    prob=cp.Cplex()
+    prob.variables.add([0]*m,types=[prob.variables.type.binary]*m)
+    prob.variables.add([p[edges[i][1]]-p[edges[i][0]] for i in range(m)],[0]*m,types=[prob.variables.type.continuous]*m)
+    prob.objective.set_sense(prob.objective.sense.maximize)
+    prob.linear_constraints.add([[[f[i,j]for j in range(n) if g.has_edge(i,j)],[1.0 for j in range(n) if g.has_edge(i,j)]]for i in range(n)],'L'*n,[q[i] for i in range(n)])
+    prob.linear_constraints.add([[[f[j,i]for j in range(n) if g.has_edge(j,i)],[1.0 for j in range(n) if g.has_edge(j,i)]]for i in range(n)],'L'*n,[q[i] for i in range(n)])
+    prob.linear_constraints.add([[[f[i[0],i[1]],x[i[0],i[1]]],[1,-th[i[0],i[1]]]]for i in edges],'G'*m,[0]*m)
+    prob.linear_constraints.add([[[f[i[0],i[1]],x[i[0],i[1]]],[1,-min(q[i[0]],q[i[1]])]]for i in edges],'L'*m,[0]*m)
+    prob.solve()
+    t4=time.time()
+except:
+    t3,t4=0,10000
+#file('vol2.txt','a').write(str(prob.solution.get_objective_value())+'\n')
+file('time2.txt','a').write('%lf\n'%(t4-t3))
 ##prob=pp.LpProblem('lyc',pp.LpMaximize)
 ##xx=pp.LpVariable.dict('a',range(m),pp.LpBinary)
 ##ggg=pp.LpVariable.dict('b',range(m),0)
