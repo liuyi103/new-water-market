@@ -9,11 +9,11 @@ for n in rg:
         os.system('datagen.py %d'%n)
         os.system('greedy.py')
         os.system('opt.py')
-data1=[float(i)for i in file('vol1.txt','r').readlines()[-100:]]
-data2=[float(i)for i in file('vol2.txt','r').readlines()[-100:]]
-plt.title('Comparsion between the trading volumes of \noptimal MIP and greedy algorithm')
+data1=[float(i)for i in file('res1.txt','r').readlines()[-100:]]
+data2=[float(i)for i in file('res2.txt','r').readlines()[-100:]]
+plt.title('Comparsion between the social welfares of \noptimal MIP and greedy algorithm')
 plt.xlabel('number of bids and asks',size=20)
-plt.ylabel(r'total trading volume (m^3)')
+plt.ylabel(r'social welfare (RMB)')
 me1,me2=np.array([np.mean(data1[i*5:i*5+5]) for i in range(20)]),np.array([np.mean(data2[i*5:i*5+5]) for i in range(20)])
 ma1,ma2=[np.max(data1[i*5:i*5+5]) for i in range(20)],[np.max(data2[i*5:i*5+5]) for i in range(20)]
 mi1,mi2=[np.min(data1[i*5:i*5+5]) for i in range(20)],[np.min(data2[i*5:i*5+5]) for i in range(20)]

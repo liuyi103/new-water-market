@@ -26,16 +26,16 @@ for i in f:
     exec i
 print m
 f.close()
-for i in range(100):
-    for j in range(100):
+for i in range(n):
+    for j in range(n):
         if g.has_edge(i,j):
             tmp=float(min(q[i],q[j]))
             if tmp<th[i,j]:
                 continue
             q[i]-=tmp
             q[j]-=tmp
-            sw+=tmp
-f=file('vol1.txt','a')
+            sw+=tmp*abs(p[i]-p[j])
+f=file('res1.txt','a')
 f.write(str(sw)+'\n')
 f.close()
 
