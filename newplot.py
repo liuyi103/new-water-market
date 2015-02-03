@@ -2,12 +2,13 @@ import matplotlib.pyplot as plt
 import os
 import numpy as np
 #a1,a2=[],[]
-rg=range(100,1000,100)
-#for n in rg:
-#    ans1,ans2=0,0
-#    for k in range(5):
-#        os.system('datagen.py %d'%n)
-#        os.system('opt.py')
+rg=range(100,2100,100)
+for n in rg:
+    ans1,ans2=0,0
+    for k in range(5):
+        os.system('datagen.py %d'%n)
+        os.system('lp.py')
+exit(0)
 data1=[float(i)for i in file('time1.txt','r').readlines()[:45]]
 data2=[float(i)for i in file('time2.txt','r').readlines()[:45]]
 plt.title('Running time of the MIP for optimal social welfare and trading volume')

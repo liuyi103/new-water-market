@@ -48,6 +48,7 @@ t1,t2,t3,t4=0,0,0,0
 #file('vol2.txt','a').write(str(prob.solution.get_objective_value())+'\n')
 #t3=time.time()
 prob=cp.Cplex()
+#p[edges[i][1]]-p[edges[i][0]]
 prob.variables.add([0]*m,types=[prob.variables.type.binary]*m)
 prob.variables.add([p[edges[i][1]]-p[edges[i][0]] for i in range(m)],[0]*m,types=[prob.variables.type.continuous]*m)
 prob.objective.set_sense(prob.objective.sense.maximize)
