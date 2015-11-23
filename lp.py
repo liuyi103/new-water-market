@@ -50,8 +50,11 @@ prob.solve()
 f=prob.solution.get_values(0,m-1)
 prob.solution.get_values
 sw=0
+flow = 0
 for i in range(m):
     sw+=f[i]>=th[edges[i][0],edges[i][1]] and f[i]*(p[edges[i][1]]-p[edges[i][0]]) or 0
+    flow += f[i]>=th[edges[i][0],edges[i][1]] and f[i] or 0
 time4=time.time()
 file('res3.txt','a').write(str(sw)+'\n')
 #file('time4.txt','a').write(str(time4-time3)+'\n')
+file('flow3.txt','a').write(str(flow)+'\n')

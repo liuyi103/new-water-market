@@ -26,6 +26,7 @@ for i in f:
     exec i
 print m
 f.close()
+flow = 0
 for i in range(n):
     for j in range(n):
         if g.has_edge(i,j):
@@ -35,7 +36,10 @@ for i in range(n):
             q[i]-=tmp
             q[j]-=tmp
             sw+=tmp*abs(p[i]-p[j])
+            flow += tmp
 f=file('res1.txt','a')
 f.write(str(sw)+'\n')
 f.close()
-
+f=file('flow1.txt','a')
+f.write(str(flow)+'\n')
+f.close()
