@@ -7,10 +7,10 @@ ds=len(rg)
 # for n in rg:
 #     ans1,ans2=0,0
 #     for k in range(5):
-#         os.system('datagen.py %d'%n)
-#         os.system('greedy.py')
-#         os.system('opt.py')
-#         os.system('lp.py')
+#         os.system('python datagen.py %d'%n)
+#         os.system('python greedy.py')
+#         os.system('python opt.py')
+#         os.system('python lp.py')
 data1=[float(i)for i in file('res1.txt','r').readlines()[-ds*5:]]
 data2=[float(i)for i in file('res2.txt','r').readlines()[-ds*5:]]
 data3=[float(i)for i in file('res3.txt','r').readlines()[-ds*5:]]
@@ -29,5 +29,5 @@ plt.errorbar(rg,me1,yerr=[me1-mi1,ma1-me1],label='greedy algorithm')
 plt.errorbar(rg,me2,yerr=[me2-mi2,ma2-me2],label='MIP')
 plt.errorbar(rg,me3,yerr=[me3-mi3,ma3-me3],label='modified LP')
 plt.legend(loc='upper left')
-plt.savefig('compare.pdf', dpi = 1200)
+# plt.savefig('compare.pdf', dpi = 1200)
 plt.show()

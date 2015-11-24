@@ -57,4 +57,4 @@ for i in range(m):
 time4=time.time()
 file('res3.txt','a').write(str(sw)+'\n')
 #file('time4.txt','a').write(str(time4-time3)+'\n')
-file('flow3.txt','a').write(str(flow)+'\n')
+# file('flow3.txt','a').write(str(flow)+'\n')
