@@ -2,7 +2,7 @@ import pulp as pp
 import networkx as nx
 import cplex as cp
 import time
-n=100
+n=40
 g=nx.Graph()
 pos={}
 sell={}
@@ -16,7 +16,7 @@ for i in f:
 f.close()
 print sell
 
-edges=[(i,j) for i in range(n) for j in range(n)if g.has_edge(i,j)]
+edges=[(i,j) for i in range(n) for j in range(n)if g.has_edge(i,j) if sell[i] == 1]
 edge_num = {x:k for k, x in enumerate(edges)}
 alphas = [p[j]-p[i] for i,j in edges]
 m = len(edges)
@@ -73,5 +73,7 @@ while helper.solution.get_objective_value() >0.1:
     helper.solve()
     ys = helper.solution.get_values()[:n]
     ts = helper.solution.get_objective_value() + sum([ys[i] * xs[i] for i in range(n)])
-    print ts
-    print master.solution.get_objective_value()
+    f = file('log.txt', 'a')
+    print helper.solution.get_objective_value()
+    f.write(str(helper.solution.get_objective_value())+'\n')
+    f.close()
