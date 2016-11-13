@@ -2,7 +2,7 @@ import pulp as pp
 import networkx as nx
 import cplex as cp
 import time
-n=40
+n=50
 g=nx.Graph()
 pos={}
 sell={}
@@ -77,3 +77,6 @@ while helper.solution.get_objective_value() >0.1:
     print helper.solution.get_objective_value()
     f.write(str(helper.solution.get_objective_value())+'\n')
     f.close()
+
+f = file('stable.txt', 'a')
+f.write('{} {}\n'.format(n, master.solution.get_objective_value()))

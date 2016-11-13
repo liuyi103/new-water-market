@@ -58,7 +58,8 @@ prob.linear_constraints.add([[[f[i[0],i[1]],x[i[0],i[1]]],[1,-th[i[0],i[1]]]]for
 prob.linear_constraints.add([[[f[i[0],i[1]],x[i[0],i[1]]],[1,-min(q[i[0]],q[i[1]])]]for i in edges],'L'*m,[0]*m)
 prob.solve()
 t4=time.time()
-file('res2.txt','a').write(str(prob.solution.get_objective_value())+'\n')
+
+file('unstable.txt','a').write(str(n)+' '+str(prob.solution.get_objective_value())+'\n')
 # file('flow2.txt','a').write(str(sum(prob.solution.get_values()[m:]))+'\n')
 
 #file('time2.txt','a').write('%lf\n'%(t4-t3))
