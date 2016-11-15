@@ -8,7 +8,7 @@ Created on Sat Nov 15 21:31:10 2014
 import sys
 import numpy as np
 import random
-n=50
+n=10
 if len(sys.argv)>1:
     n=int(sys.argv[1])
 print n
