@@ -1,5 +1,6 @@
 import networkx as nx
 import cplex as cp
+import os
 import time
 n=50
 g=nx.DiGraph()
@@ -49,6 +50,9 @@ try:
 
     print p.solution.get_objective_value()
     file('lp3.txt' ,'a').write('{} {}\n'.format(n, p.solution.get_objective_value()))
+    if p.solution.get_objective_value() < 0.999999:
+        os.system('cp data.txt counter_example%lf.txt'%time.time())
+        os.system('cp data.txt counter_example.txt')
 except:
     for k in range(m):
         print edges[k], alphas[k] * values[k]
